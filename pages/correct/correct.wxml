@@ -1,0 +1,4 @@
+<!--pages/correct/correct.wxml-->
+<button>选择要矫正的站点</button>
+<button bindtap="correct">开始选点</button>
+<button>确认提交</button>

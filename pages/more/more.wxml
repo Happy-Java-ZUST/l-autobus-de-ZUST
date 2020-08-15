@@ -1,0 +1,35 @@
+<!--pages/more/more.wxml-->
+<view class="page">
+  <view class="info">
+    <image src="/static/image/icon1.jpg"class='info-logo'/>
+    <text class="info-name">浙江科技学院校车时刻表</text>
+  </view>
+
+  <navigator url="/pages/notice/notice" class="navigator" hover-class="navigator-hover">
+    <image src="/static/image/notice.jpg" class="navigator-img"></image>
+    <view class="navigator-text">告示</view>
+    <view class="navigator-arrow"></view>
+  </navigator>
+  
+  <navigator url="/pages/connect/connect" class="navigator-top" hover-class="navigator-hover">
+    <image src="/static/image/connect.jpg" class="navigator-img"></image>
+    <view class="navigator-text">联系我们</view>
+    <view class="navigator-arrow"></view>
+  </navigator>
+
+  <view class="navigator-top" hover-class="navigator-hover">
+    <image src="/static/image/hongbao.png" class="navigator-img"></image>
+    <view bindtap="jump" class="navigator-text">答问卷抢红包</view>
+    <view class="navigator-arrow"></view>
+  </view>
+
+   <!---<navigator url="/pages/usage/usage" class="navigator-top" hover-class="navigator-hover">
+    <image src="/static/image/usage.jpg" class="navigator-img"></image>
+    <view class="navigator-text">使用说明</view>
+    <view class="navigator-arrow"></view>
+  </navigator>-->
+
+  
+
+ <footer/>
+</view>

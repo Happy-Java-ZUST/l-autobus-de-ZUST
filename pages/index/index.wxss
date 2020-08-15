@@ -1,0 +1,146 @@
+/**index.wxss**/
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  box-sizing: border-box;
+} 
+
+.special-topic {
+  width: 100%;
+  height: 350rpx;
+  display: flex;
+  /* 从最下面开始布局 */
+  align-items: center;
+  position: relative;
+}
+
+.special-topic-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 80rpx;
+  position: absolute;
+  margin-left: 150rpx;
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.in{
+  display: flex;
+  flex-direction: column;
+}
+
+.userinfo-avatar {  
+  overflow:hidden;  
+  display: block;  
+  width: 128rpx;  
+  height: 128rpx;  
+  margin: 20rpx;  
+  border-radius: 50%;  
+  border: 4rpx solid #fff;  
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);  
+}  
+
+.userinfo-nickname {
+  font-weight: 600;
+  font-size: 20px;
+}
+.section{
+  border:1px solid #f5b9;
+  background: #f7e0de;
+  border-radius: 7px;
+  width:93%;
+  align-content: center;
+  vertical-align: center;
+  margin-left: 3%;
+  margin-bottom: 10px;
+}
+
+
+
+.table{
+  border:1px solid #f5b900;
+  border-radius: 7px;
+  width:93%;
+  align-content: center;
+  vertical-align: center;
+  margin-left: 3%;
+  margin-bottom: 10px;
+}
+
+
+.tr{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  
+}
+.td{
+  font-weight: 600;
+  color: red;
+  background: #f8e8b7;
+}
+
+.th{
+  font-weight: 600;
+  background: #FFFFFF;
+  font-size: 17px;
+  border:1px solid #f5b900;
+
+}
+.when1{
+  background: white;
+  width:20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border:1px solid #f5b900;
+
+
+}
+
+.td1{
+  background: #FFFFFF;
+  border:1px solid #f5b900;
+
+}
+.td11{
+  text-decoration-line: underline;
+}
+.td2{
+  background: #f8e8b7;
+}
+.td22{
+  text-decoration-line: underline;
+}
+
+.when2{
+  background: #f8e8b7;
+  width:20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border:1px solid #f5b900;
+
+}
+
+
+
+
+.td, .td1, .td2{
+  font-size: 15px;
+}
+
+.th, .td, .td1, .td2{
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+}
+

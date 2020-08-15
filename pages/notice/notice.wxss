@@ -1,0 +1,22 @@
+/* pages/notice/notice.wxss */
+.sign {
+  display: flex;
+  flex-direction:row;
+  justify-content:flex-end;
+  margin-left: 20%;
+}
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 20px;
+  margin: 5%;
+}
+
+.usage{
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 5%;
+}

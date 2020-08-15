@@ -1,0 +1,11 @@
+<!--components/footer.wxml-->
+
+<view class="page" data-weui-theme="{{theme}}">
+<view class="weui-footer">
+			<view class="weui-footer__links">
+				<a class="weui-footer__link">deer_echo@foxmail.com</a>
+				<a class="weui-footer__link">github已开源</a>
+			</view>
+			<view class="weui-footer__text">Copyright &copy; 2020-2024 ZUST</view>
+		</view>
+</view>
