@@ -35,6 +35,16 @@ App({
         }
       }
     })
+   /* wx.getLocation({
+      type: 'gcj02',
+      success:(res)=> {
+        this.setData({
+          latitude:res.latitude,
+          longitude:res.longitude,
+          
+        })
+      }
+    })*/
   },
   onShow(){
     wx.showShareMenu({
@@ -42,8 +52,11 @@ App({
       menus: ['shareAppMessage', 'shareTimeline']
     })
   },
+  
   globalData: {
-    userInfo: null
+    userInfo: null,
+   // latitude:0,
+   // longitude:0,
   },
 
 })

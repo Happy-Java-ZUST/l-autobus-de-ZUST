@@ -7,8 +7,9 @@ Page({
     contact:"",
     noteMaxLen: 200,//备注最多200字数
     filepaths:"",
-    imagepath:"/static/image/bus.jpg",
-    phone:""
+    otherimagepath:"/static/image/bus.jpg",
+    phone:"",
+    imagepath:""
   }, 
 
   formsubmit(e){

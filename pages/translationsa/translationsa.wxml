@@ -1,0 +1,14 @@
+<!--pages/translationsa/translationsa.wxml-->
+<view class="page">
+
+  <view class="title">
+  交通咨询
+  </view>
+  <view class="usage">
+    <rich-text nodes="{{htmlSnip}}"></rich-text>
+  </view>
+<view class="usage"></view>
+<view class="text_align">具体交通咨询安排调整以学校官网为准</view>
+<view class="usage"></view>
+<footer></footer>
+</view>

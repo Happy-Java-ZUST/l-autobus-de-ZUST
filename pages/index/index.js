@@ -1,7 +1,8 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+//var longitude=getApp().globaldata.longtitude
+//var latitude=getApp().globaldata.latitude
 //get local data
 var timeTable = require("../../static/timetable.js").data;
 var pyName = require("../../static/pyname.js").data;
@@ -12,24 +13,23 @@ var util = require("../../static/util.js");
 Page({
   data: {
     // userinfo
-    userInfo: {},
-    hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     pickerDepart: "市区",
     pickerDestin: "小和山",
     week: "？",
-    pickerWeek: "周一至周五",
+    pickerWeek: "工作日",
     // picker
     multiArray: [
-      ['周一至周五', '周六', '周日', '双休节假日'],
+      ['工作日', '周六', '周日', '节假日'],
       ['市区', '小和山', '安吉'],
       ['小和山']
     ],
     multiIndex: [0, 0, 0],
-    when:"?",
-    timeList:{}
+    when: "?",
+    timeList: {},
+    //routes:''
   },
- 
+
   bindMultiPickerChange: function (e) {
     // console.log('picker发送选择改变，携带值为', e.detail.value)
 
@@ -72,7 +72,7 @@ Page({
 
     // update multiIndex
     data.multiIndex[e.detail.column] = e.detail.value;
-    
+
     switch (e.detail.column) {
       case 0:
         switch (data.multiIndex[0]) {
@@ -81,16 +81,16 @@ Page({
             data.multiArray[2] = ['小和山'];
             break;
           case 1:
-            data.multiArray[1] = ['市区', '小和山'];
-            data.multiArray[2] = ['小和山'];
+            data.multiArray[1] = ['市区', '小和山','安吉'];
+            data.multiArray[2] = ['小和山','安吉'];
             break;
           case 2:
-            data.multiArray[1] = ['市区', '小和山'];
-            data.multiArray[2] = ['小和山'];
+            data.multiArray[1] = ['市区', '小和山','安吉'];
+            data.multiArray[2] = ['小和山','安吉'];
             break;
           case 3:
-            data.multiArray[1] = ['安吉', '小和山'];
-            data.multiArray[2] = ['小和山'];
+            data.multiArray[1] = ['安吉','市区'];
+            data.multiArray[2] = ['市区'];
             break;
         }
         data.multiIndex[1] = 0;
@@ -107,34 +107,40 @@ Page({
                 data.multiArray[2] = ['市区', '安吉'];
                 break;
               case 2:
-                data.multiArray[2] = ['小和山'];
+                data.multiArray[2] = ['小和山','市区'];
                 break;
             }
             break;
           case 1:
             switch (data.multiIndex[1]) {
               case 0:
-                data.multiArray[2] = ['小和山'];
+               
+                data.multiArray[2] = ['小和山','安吉'];
+                
                 break;
               case 1:
                 data.multiArray[2] = ['市区'];
                 break;
+              case 2:
+                data.multiArray[2]=['市区'];
             }
             break;
           case 2:
             switch (data.multiIndex[1]) {
               case 0:
-                data.multiArray[2] = ['小和山'];
+                data.multiArray[2] = ['小和山','安吉'];
                 break;
               case 1:
                 data.multiArray[2] = ['市区'];
                 break;
+              case 2:
+                data.multiArray[2]=['市区'];
             }
             break;
           case 3:
             switch (data.multiIndex[1]) {
               case 0:
-                data.multiArray[2] = ['小和山'];
+                data.multiArray[2] = ['市区'];
                 break;
               case 1:
                 data.multiArray[2] = ['安吉'];
@@ -149,20 +155,39 @@ Page({
     // update data
     this.setData(data);
   },
-  handleUserInfo(event){
-    this.setData({
-      hasUserInfo:true,
-    })
+
+  getMap(e) {
+   console.log(e)
+    var route = e.currentTarget.dataset.timerow["site"]
+    var starting=e.currentTarget.dataset.timerow["start"]
     
-  },
-  getMap(e){
-    var route=e.currentTarget.dataset.timerow["site"]
+   /* this.setData({
+      routes:route
+    })*/
+   // console.log(starting)
     wx.navigateTo({
-      url: '../map/map?current=' + route,
+      url: '../map/map?current=' + route +'&onstart='+starting
     })
 
   },
-  onLoad: function () {
+  onLoad: function (e) {
+    console.log(e.title)
+    this.setData({ 
+      msgList: [ 
+        { url: "url", title: "公告：浙科校车小程序还在整改，目前部分" },
+        { url: "url", title: "定位还在完善中.....，建议前往上车地点前" }, 
+        { url: "url", title: "询问下老师！另外部分起始点为市区，即是小和" }, 
+        { url: "url", title: "山校区门口，请广大师生在进行比对后再确认" }, 
+      {url:"url",title:"上车地点！"}] 
+    }) 
+    wx.getLocation({
+      type: 'gcj02',
+      success:(res)=> {
+          this.latitude=res.latitude
+          this.longitude=res.longitude
+              
+      }
+    }) 
     wx.getNetworkType({
       success(res) {
         let networkType = res.subtype || res.networkType;
@@ -206,7 +231,7 @@ Page({
       pickerWeek = "周日";
       multiIndex[0] = 2;
     } else {
-      pickerWeek = "周一至周五";
+      pickerWeek = "工作日";
       multiIndex[0] = 0;
     }
     let timeList = timeTable[pyName[pickerWeek]][pyName[this.data.pickerDepart]][pyName[this.data.pickerDestin]];
@@ -216,8 +241,10 @@ Page({
       pickerWeek: pickerWeek,
       timeList: timeList,
       multiIndex: multiIndex,
-      when:result.when
+      when: result.when
     })
+    console.log(this.data.timeList)
+
     wx.onNetworkStatusChange(function (res) {
       if (res.isConnected === false) {
         wx.showToast({
@@ -234,5 +261,8 @@ Page({
       }
     })
   },
-  
+ 
 })
+/*module.exports = {
+  data: routes
+};*/

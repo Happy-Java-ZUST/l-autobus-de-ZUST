@@ -1,50 +1,157 @@
-// pages/correct/correct.js
-const chooseLocation = requirePlugin('chooseLocation');
+//暂存markers
+const markers=[];
 
+const CB = wx.cloud.database().collection("reactData");
 Page({
-
-  /**
-   * 页面的初始数据
-   */
-  data: {
-   
+  data:{
+  latitude:'',
+  longitude:'',
+  markers:[],
+  num:0,
+  points:[],
+  polyline:[],
+  //content:" ",
+  inputvalue:null,
+  //records:[]
   },
-  correct(){
-    const key = 'NRQBZ-HJJ6J-KQ2FH-KHNX2-SDWUS-RABED'; //使用在腾讯位置服务申请的key
-  const referer = '浙科行'; //调用插件的app的名称
-  const location = JSON.stringify({
-    latitude:30.267942,
-    longitude: 120.123749
-  });
-  const category = '生活服务,娱乐休闲';
+
+ onLoad(){
+
+  wx.getLocation({
+    type:'gcj02',
+    success:(res)=> {
+      this.setData({
+        latitude:res.latitude,
+        longitude:res.longitude,
+       })
+     },
+     fail(res){
+       console.error(res);
+       
+     }
+   })
+   //每3秒踩点一次
+   setInterval(
+     this.getPoint,3000
+     )
+  },
+  getPoint(){
+    wx.getLocation({
+      type:'gcj02',
+      success:(res)=> {
+        this.setData({
+          latitude:res.latitude,
+          longitude:res.longitude,
+        })
+      },
+      fail(res){
+         console.error(res);
+         
+        }
+      })
+      
+      //获取当前位置并存储到polyline
+      this.data.points.push({
+        latitude:this.data.latitude,
+        longitude:this.data.longitude
+      })
+   // console.log(this.data.points)
+   this.setData({
+     polyline:[{
+       points: this.data.points,
+       color: "#0091ff",
+       width: 3,
+      }],
+      
+    })
+    
+  },
+  addPosition(){
+    //this.onLoad();
+    wx.getLocation({
+      type:'gcj02',
+      success:(res)=> {
+        var num=this.data.num
+        this.setData({
+          num:num+1,
+        })
+        markers.push({
+          latitude:res.latitude,
+          longitude:res.longitude,
+          id:num,
+          width:40,
+          height:40,
+          label:{
+            content:num+1,
+            display:'ALWAYS',
+            borderRadius:15,
+            fontSize:15,
+            padding:2,
+            anchorX:-20,
+            anchorY:-40,
+            textAlign:"center"
+          }
+        })
+        this.setData({
+          markers:markers
+        })
+        console.log(this.data.polyline)
+        
+       },
+       fail(res){
+         console.error(res);
+         
+       }
+     })
+    
+  },
+ /* Record(e){
+    this.data.content=e.detail.value;
+    console.log(e)
   
-  wx.navigateTo({
-    url: `plugin://chooseLocation/index?key=${key}&referer=${referer}&location=${location}&category=${category}`
-  });
+    //console.log(e.detail.value);
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+/*  records(){
+    var data=this.data;
+    data.records.push(this.data.content)
+    console.log(data.records)
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-    // 从地图选点插件返回后，在页面的onShow生命周期函数中能够调用插件接口，取得选点结果对象
-onShow () {
-  const location = chooseLocation.getLocation(); // 如果点击确认选点按钮，则返回选点结果对象，否则返回null
-  console.log(location)
-},
-
-
+ /* getData(){
+    
+   /* CB.add({
+      data:{
+         经度:data.latitude,
+         纬度:data.longitude,
+         地点:data.content
+         },
+         success(res){
+           
+         console.log("添加至数据库成功",res)
+       },
+       fail(res){
+        console.log("添加失敗",res)
+      }
+    },
+    DelData(res){
+      const that=this;
+      that.data.records.splice(that.data.records.findIndex( index => index === res.currentTarget.dataset.id), 1)
+      that.setData({
+        'inputvalue':'',
+        records: that.data.records
+      })
+      console.log(that.data.records)
+    })*/
+  /*  CB.doc("_id").remove({
+      success: function() {
+      console.log("删除数据成功")
+    },
+    fail(){
+      console.log("删除失败")
+      
+    })
+    
+    
+  }
+}*/
+  
 })

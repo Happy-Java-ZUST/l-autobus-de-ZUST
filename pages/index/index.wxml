@@ -1,4 +1,17 @@
 <!--index.wxml-->
+<view  class='view_notice_contain'>
+<image src='../../static/image/sound.png' class='image_notice' mode="widthFix" style="width:40rpx;height:40rpx"></image>
+<swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="3000"> 
+   <block wx:for="{{msgList}}" wx:key="item"> 
+    <navigator url="/pages/more/more?title={{item.url}}" open-type="switchTab"> 
+       <swiper-item> 
+       <view class="swiper_item">{{item.title}}</view> 
+       </swiper-item> 
+     </navigator> 
+   </block> 
+  </swiper> 
+</view>
+
 <view class="container">
 	<view class="special-topic">
 		<image style="width: 100%; height: 100%" src="/static/image/block.jpg"></image>
@@ -6,8 +19,7 @@
 		<view class="special-topic-content">
 			<!--get user information and show avatar&nickname-->
 			<view class="userinfo">
-				<button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="handleUserInfo"> 点击获取头像昵称 </button>
-				<block wx:else>
+				<block >
 					<open-data class='userinfo-avatar' type='userAvatarUrl' ></open-data>
           <view class="in">
 					<open-data type='userNickName' class="userinfo-nickname"></open-data>
@@ -23,28 +35,43 @@
   <view class="section">
     <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
       <view class="picker">
-        （点击选择）{{multiArray[0][multiIndex[0]]}}: {{multiArray[1][multiIndex[1]]}}-->{{multiArray[2][multiIndex[2]]}}
+				 <view class="td-button">{{multiArray[1][multiIndex[1]]}}</view>
+            <text class='dialog-close' decode='true'>&lt;</text>
+            <view class="td-button">{{multiArray[0][multiIndex[0]]}}</view>
+            <text class='dialog-close' decode='true'>&gt;</text>
+            <view class="td-button">{{multiArray[2][multiIndex[2]]}}</view>
       </view>
     </picker>
   </view>
 	<!--table-->
-	<view>
-		<view class="table">
+	<view class="table">
+		<view >
 			<view class="tr">
 				<view class="td">下一班次 {{when}}</view>
 			</view>
 			<view class="tr" wx:key="property" wx:for="{{timeList}}" wx:for-index="idx" wx:for-item="timeRow">
 				<block wx:if="{{idx%2}}">
 					<view class="when2">{{timeRow["when"]}}</view>
-					<view  class="td2" hover-class="td22" bindtap="getMap"id="{{idx}}" data-timeRow="{{timeRow}}" >{{timeRow["site"]}}</view>
+					<view 
+					 class="td2" hover-class="td22"
+					  bindtap="getMap"id="{{idx}}" data-timeRow="{{timeRow}}" >
+					{{timeRow["start"]}}-->{{timeRow["end"]}}
+						<view class="navigator-arrow"></view>
+
+					</view>
 				</block>
 				<block wx:else>
 					<view class="when1">{{timeRow["when"]}}</view>
-					<view bindtap="getMap" hover-class="td11" class="td1" id="{{idx}}" data-timeRow="{{timeRow}}">{{timeRow["site"]}}</view>
+					<view bindtap="getMap"
+					 hover-class="td11"class="td1"
+					  id="{{idx}}" data-timeRow="{{timeRow}}">
+					{{timeRow["start"]}}-->{{timeRow["end"]}}
+					<view class="navigator-arrow"></view>
+					</view>
+
 				</block>
 			</view>
 		</view>
 	</view>
-	<footer/>
 
 </view>

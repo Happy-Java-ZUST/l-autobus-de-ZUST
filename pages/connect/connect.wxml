@@ -1,25 +1,26 @@
 <!--pages/connect/connect.wxml-->
-<view class="all">
-
-	<!--反馈框-->
-	<view >
-		<view class="contant">
-			<textarea name="content" bindinput="addtextandwordlimit" maxlength="{{noteMaxLen}}" auto-height placeholder-class="placeholder" placeholder="为了带给您更好的体验,期待您的任何反馈,我们将会不断改进" />
-			<view class="wordlimited">{{currentNoteLen|0}}/{{noteMaxLen}} </view>
-		</view>
-	</view>
-    <view class="imgbox">
-    <view>
-	<view class="imgfile">图片上传</view>
-	<!--上传并显示图片  -->
-		<view class="imgselect" bind:tap="uploadphoto"/>
-    </view>
-			<image src="{{imagepath}}"></image>
-    </view>
+ <view class="all">
+            
+              <view class="contant">
+                    <textarea name="content"  bindinput="addtextandwordlimit"  maxlength="{{noteMaxLen}}"   auto-height  placeholder-class="placeholder" placeholder="为了带给您更好的体验,期待您的任何反馈,我们将会不断改进" />
+                     
+                    <text class="wordlimited">{{currentNoteLen|0}}/{{noteMaxLen}} </text>
+              
+             </view>
+             <view class="imgfile">图片上传</view>
+                       <!--上传并显示图片  -->
+                <view  style="width:90%;height:90px;margin:0 auto 30px;">
+                 <view  class="imgselect" bind:tap="uploadphoto">
+								    <image src="{{imagepath}}"></image>
+								 </view>
+								 <!--<view class="improve">
+								 <image src="{{otherimagepath}}"></image>
+								</view> -->
+                </view>        
 	<form bindsubmit="formsubmit">
 			<input type="number" name="contact" maxlength="11" placeholder-class="placeholder" placeholder="请输入您的手机号,方便我们及时给您回复" />
+			<button class="btn" formType="submit" bindtap="getData" hover-class="none">提交</button>
 	</form>
-			<button class="btn"formType="submit" bindtap="getData" hover-class="none">提交</button>
     <!--页脚-->
 	<footer/>
 
