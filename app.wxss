@@ -1,2 +1,5 @@
 /**app.wxss**/
 @import'/style/weui.wxss';
+.button-footer{
+  margin-bottom: 0rpx;
+}

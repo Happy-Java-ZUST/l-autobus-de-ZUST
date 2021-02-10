@@ -1,4 +1,7 @@
 /* pages/more/more.wxss */
+.page{
+  height: 100%;
+}
 
 .info {
   display: flex;

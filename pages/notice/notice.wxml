@@ -13,8 +13,11 @@
     <rich-text nodes="{{htmlSnip}}"></rich-text>
   </view>
 
+<!-- <view>------------------------------------------------------</view>-->
   <view class="sign">
-    联系电话：13605718148/18658177935（陈顺斌)
+    联系电话：13605718148/18658177935（陈顺斌）
   </view>
-  
+  <view class="usage">
+  </view>
+  <footer/>
 </view>

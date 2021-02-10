@@ -1,1 +1,14 @@
 /* pages/correct/correct.wxss */
+.box1{
+  margin-top: 100rpx;
+}
+input{
+  border: 2rpx solid #f5b900;
+  margin-right:50rpx;
+}
+.orcanement{
+  background: rgba(0,0,0,0);
+  border: 2px solid#FF8C00; 
+  border-radius: 20px;  
+  font-weight: 600;
+}

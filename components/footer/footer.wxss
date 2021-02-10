@@ -1,9 +1,2 @@
 /* components/footer.wxss */
 @import'/style/weui.wxss';
-.weui-footer{
-  margin-bottom:50rpx;
-  margin-top: 50rpx;
-}
-.weui-footer_fixed-bottom{
-  margin-bottom:0
-}

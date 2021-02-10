@@ -4,7 +4,16 @@
     <image src="/static/image/icon1.jpg"class='info-logo'/>
     <text class="info-name">浙江科技学院校车时刻表</text>
   </view>
-
+<navigator url="/pages/process/process" class="navigator" hover-class="navigator-hover">
+    <image src="/static/image/process.png" class="navigator-img"></image>
+    <view class="navigator-text">上车流程</view>
+    <view class="navigator-arrow"></view>
+  </navigator>
+<navigator url="/pages/translationsa/translationsa" class="navigator" hover-class="navigator-hover">
+    <image src="/static/image/translation.png" class="navigator-img"></image>
+    <view class="navigator-text">交通咨询</view>
+    <view class="navigator-arrow"></view>
+  </navigator>
   <navigator url="/pages/notice/notice" class="navigator" hover-class="navigator-hover">
     <image src="/static/image/notice.jpg" class="navigator-img"></image>
     <view class="navigator-text">告示</view>
@@ -31,5 +40,4 @@
 
   
 
- <footer/>
 </view>

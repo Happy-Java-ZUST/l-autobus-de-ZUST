@@ -1,19 +1,26 @@
 <!--地图容器-->
 <!--longitude及latitude为设置为调转到指定地址位置，默认不显示-->
 <map id="myMap"
+    style="width:100%;height:1400rpx;"
+    longitude="{{longitude}}"
+    latitude="{{latitude}}"
+   polyline="{{polyline}}"
     markers="{{markers}}"
-    style="width:100%;height:300px;"
-    longitude="{{poi.longitude}}"
-    latitude="{{poi.latitude}}"
-    scale='12' 
-    polyline="{{polyline}}"
+    scale='11' 
     show-location>
-</map>
 <!--form表单-->
-
+<!--x轴滚动 显示当前车次路线-->
+<view class='wrapX'>
+	<view class="wrapOut">
+		<view class="wrapInner">
+			<view class="contant">本车路线：{{notice}}</view>
+		</view>
+	</view>
+</view>
+<view class="pattern">本次车辆为:{{bus}}</view>
+<view class="pattern">可乘坐的人数为：{{people}}</view>
+<!--<button style="width:40vw" bind:tap="findStation" class="box3">查询上车地点</button>-->
 <navigator url="/pages/correct/correct">路线矫正</navigator>
-
-<!--地址描述经纬度展示-->
-<view>地址纬度：{{poi.latitude}}</view>
-<view>地址经度：{{poi.longitude}}</view>
-<text>还在开发中功能不全。。。</text>
+<button  style="width:50vw" bindtap="findStation" class="box1">起始站点导航</button>
+<button style="width:50vw" bindtap="subway" class="box2">查看附近地铁</button>
+</map>

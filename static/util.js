@@ -71,7 +71,7 @@ function timePicker(date) {
 function update_next(timeList) {
   let time = formatTime(new Date());
   console.log("now:",time)
-  let when = "6:50";
+  let when = "今日无剩余";
 
   if (timeList == undefined) {
     return {

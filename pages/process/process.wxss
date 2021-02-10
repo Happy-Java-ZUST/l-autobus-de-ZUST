@@ -1,0 +1,20 @@
+/* pages/process/process.wxss */
+.text_align{
+  color:red;
+  font-size: large;
+  text-align: center;
+}
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 20px;
+  margin: 5%;
+}
+.usage{
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 5%;
+}
