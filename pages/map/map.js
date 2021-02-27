@@ -28,12 +28,14 @@ Page({
       {
         title:""
       },
-       
     ],
     notice:'',
     bus:'',
+    car_num:'',
     people:0,
+    mapheight:'450rpx',
   },
+  //给参数赋值（options是传入的参数）
   onLoad:function(options){
    
     //get the route now
@@ -41,10 +43,11 @@ Page({
     this.setData({
       route:options.current,
       starts:options.onstart,
-      
+      end:options.onend,
+      car_num:options.car_num,
     })
     //console.log(options.current);
-   // console.log(this.data.starts);
+    //console.log(this.data.starts);
     //get user location 
    
     wx.getLocation({
@@ -56,35 +59,35 @@ Page({
           
         })
       }
-    }) 
+    })
     
     this.setData({
       stations:String(this.data.route).split("——"),
-      
     })
+
     var _this=this;
     var markers=[];
-    _this.setData({
-      bus:_this.data.stations[_this.data.stations.length-1]
-    })
-    
-    for(var i=0;i<_this.data.stations.length-1;i++){
 
+    _this.setData({
+      bus:_this.data.car_num,
+      // car_num:
+    })
+  
+    for(var i=0;i<_this.data.stations.length-1;i++){
       var strJSON=local.data[_this.data.stations[i]]
       _this.data.points.push({
         latitude:strJSON.latitude,
         longitude:strJSON.longitude
       })
+
       markers.push({
         id:i,
         latitude:strJSON.latitude,
         longitude:strJSON.longitude,
-        
         width:40,
         height:40,
         iconPath:markers.png,
         callout:{
-        
           content:_this.data.stations[i],
           display:'ALWAYS',
           borderRadius:20,
@@ -93,10 +96,10 @@ Page({
           anchorX:10,
           anchorY:10,
           textAlign:"center"
-
         }
       })
     }
+  
     this.setData({
       markers:markers,
       polyline:[{
@@ -105,44 +108,46 @@ Page({
         width: 3,
       }],
     })
- console.log(this.data.markers)
- //console.log(typeof(this.data.markers))
- //console.log(this.data.markers[0].latitude)
- latitudes=this.data.markers[0].latitude;
- longitudes=this.data.markers[0].longitude
- qqmapsdk.calculateDistance({
-   mode:'driving',
-   from:'30.322399,120.151138',
-   to:'30.21986,120.025139',
-   success:function(res){
-     console.log(res.elements)
-   }
- })
-/* this.setData({ 
+    console.log(this.data.markers)
+    //console.log(typeof(this.data.markers))
+    //console.log(this.data.markers[0].latitude)
+    latitudes=this.data.markers[0].latitude;
+    longitudes=this.data.markers[0].longitude
+    qqmapsdk.calculateDistance({
+      mode:'driving',
+      from:'30.322399,120.151138',
+      to:'30.21986,120.025139',
+      success:function(res){
+        console.log(res.elements)
+      }
+    })
+  /* this.setData({ 
   items: [ 
     { title: "本车路线：{{route}}" },
   ]
-})*/ 
-this.autoChangeX();
-  
-},
-onReady: function () {
-  if(this.data.bus=="（大客1辆）"){
-    this.setData({
-     people:"54人"
-    })
-   }else if(this.data.bus=="（中客1辆）"){
-    this.setData({
-      people:"38人"
-    })
+  })*/ 
+    this.autoChangeX();
+  },
+  //空位余量
+  onReady: function () {
+    //根据获取的大客还是中客设置人数
+    // console.log(this.data.car_num);
+    if(this.data.car_num=="大客1辆"){
+      this.setData({
+        people:"54人"
+      })
+    }else if(this.data.car_num=="中客1辆"){
+      this.setData({
+        people:"38人"
+      })
     }else{
       this.setData({
         people:"至少可以乘坐38人"
       })
-
-     }
-},
-autoChangeX: function () {
+    }
+  },
+  //滚动显示路线
+  autoChangeX: function () {
     // 定义初始第一条的内容
     let index = 0;
     const {items} = this.data;
@@ -158,13 +163,26 @@ autoChangeX: function () {
           notice:this.data.route
         })
         index = 0;
-      } else {
+      }else{
         this.setData({
           notice: this.data.route
         })
         index++;
       }
     }, 1000*20)
+  },
+  shensuo: function (e) {
+    console.log(e);
+    if (this.data.mapheight == '1000rpx') {
+      this.setData({
+        mapheight:'450rpx',
+      })
+    }else if (this.data.mapheight == '450rpx') {
+      this.setData({
+        mapheight:'1000rpx',
+      })
+    }
+    
   },
 
  /* findway(){
@@ -180,29 +198,28 @@ wx.navigateTo({
     url: 'plugin://routePlan/index?key=' + key + '&referer=' + referer + '&endPoint=' + endPoint
 });
   },*/
+  //附近地铁
   subway(){
     let plugin = requirePlugin("subway");
     let key = 'NRQBZ-HJJ6J-KQ2FH-KHNX2-SDWUS-RABED';  //使用在腾讯位置服务申请的key
     let referer = '浙科行';   //调用插件的app的名称
-wx.navigateTo({
- url: 'plugin://subway/index?key=' + key + '&referer=' + referer
-});
+    wx.navigateTo({
+      url: 'plugin://subway/index?key=' + key + '&referer=' + referer
+    });
   },
-  //
+
+  //起始点导航
   findStation(){  
     let plugin = requirePlugin('routePlan');
     let key = 'NRQBZ-HJJ6J-KQ2FH-KHNX2-SDWUS-RABED';  //使用在腾讯位置服务申请的key
     let referer = '浙科行';   //调用插件的app的名称
     let endPoint = JSON.stringify({  //上车点
-        'name': this.data.starts,
-        'latitude':latitudes,
-        'longitude':longitudes
+      'name': this.data.starts,
+      'latitude':latitudes,
+      'longitude':longitudes
     });
     wx.navigateTo({
-        url: 'plugin://routePlan/index?key=' + key + '&referer=' + referer + '&endPoint=' + endPoint
+      url: 'plugin://routePlan/index?key=' + key + '&referer=' + referer + '&endPoint=' + endPoint
     });
-      
   }
-
-
 })

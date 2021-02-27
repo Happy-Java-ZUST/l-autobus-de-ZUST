@@ -1,13 +1,3 @@
-<!--地图容器-->
-<!--longitude及latitude为设置为调转到指定地址位置，默认不显示-->
-<map id="myMap"
-    style="width:100%;height:1400rpx;"
-    longitude="{{longitude}}"
-    latitude="{{latitude}}"
-   polyline="{{polyline}}"
-    markers="{{markers}}"
-    scale='11' 
-    show-location>
 <!--form表单-->
 <!--x轴滚动 显示当前车次路线-->
 <view class='wrapX'>
@@ -17,10 +7,67 @@
 		</view>
 	</view>
 </view>
-<view class="pattern">本次车辆为:{{bus}}</view>
-<view class="pattern">可乘坐的人数为：{{people}}</view>
-<!--<button style="width:40vw" bind:tap="findStation" class="box3">查询上车地点</button>-->
-<navigator url="/pages/correct/correct">路线矫正</navigator>
-<button  style="width:50vw" bindtap="findStation" class="box1">起始站点导航</button>
-<button style="width:50vw" bindtap="subway" class="box2">查看附近地铁</button>
+
+<!--地图容器-->
+<!--longitude及latitude为设置为调转到指定地址位置，默认不显示-->
+<map id="myMap"
+    style="width:100%;height:{{mapheight}};"
+    longitude="{{longitude}}"
+    latitude="{{latitude}}"
+    polyline="{{polyline}}"
+    markers="{{markers}}"
+    scale='11' 
+    show-location>
 </map>
+
+<!-- <view class="pattern">本次车辆为:{{bus}}</view> -->
+<!-- 内容 -->
+<view class = "xaifangneirong">
+    <!-- 是否隐藏的符号 -->
+    <view class="yincangfuhao" bindtap="shensuo">
+        <view class="yincangbutton">dianji</view>
+    </view>
+    <!-- 基本信息 -->
+    <view class = "information">
+        <view class="bus_leixing">
+            {{bus}}
+        </view>
+        <view class="rate_people">
+            可乘坐人数（剩余位置）：{{people}}
+        </view>
+    </view>
+
+    <view class="bingpai">
+        <!-- <view class="pattern">可乘坐的人数为：{{people}}</view> -->
+        <!-- 多少时间到达 -->
+        <view class="shijianxinxi">
+            <view class="time_title">
+                预计到达时间：
+            </view>
+            <view class="time_con">
+                已超时
+            </view>
+        </view>
+
+        <!-- 还剩几站 -->
+        <!--<button style="width:40vw" bind:tap="findStation" class="box3">查询上车地点</button>-->
+        <view class="zhandianxinxi">
+            <view class="zhan_title">
+                下一站：
+            </view>
+            <view class="zhan_con">
+                {{stations[1]}}
+            </view>
+        </view>
+    </view>
+
+    <view class="station_picture">
+        <view></view>
+    </view>
+
+</view>
+
+<!-- 如果出现错误，进行路线矫正 -->
+<view class = "luxianjiaozheng">
+    <navigator url="/pages/correct/correct">路线矫正</navigator>
+</view>

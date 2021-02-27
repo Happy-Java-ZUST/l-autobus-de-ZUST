@@ -1,57 +1,181 @@
-.box1{
-  margin-top: 790rpx;
-  background: rgba(0,0,0,0);
-  border: 2px solid #70bcf6; 
-  border-radius: 20px;  
-}
-.box2{
-  margin-top: 10rpx;
-  background: rgba(0,0,0,0);
-  border: 2px solid #70bcf6; 
-  border-radius: 20px;  
-}
-.box3{
-  background: rgba(0,0,0,0);
-  border: 2px solid #DB7093; 
-  border-radius: 20px;
-}
-.pattern{
+/* 之前的文件 */
+/* .pattern{
   font-weight:600;
-  
-}
-.border{
+} */
+
+/* .border{
   border-color: darkturquoise;
-}
+} */
+
+/* 滚动显示 */
 .wrapX {
   padding: 20rpx;
 }
-
+/* 滚动显示 */
 .wrapOut {
       background-color: #FFEBDA;
       height: 60rpx;
       border-radius: 30rpx;
       overflow: hidden;
 }
+/* 滚动显示 */
 .wrapInner {
     overflow: hidden;  
      margin-left: 40rpx;
      margin-right: 40rpx;
-      }
- .contant {
-    font-weight: 300;
-     line-height: 60rpx;
-     white-space: nowrap;
-     animation: remindMessage 20s linear infinite;
-     width: 100%;
-          }
-  @keyframes remindMessage {
-      0% {
-                -webkit-transform: translateX(100%);
-          }
+}
+/* 滚动显示 */
+.contant {
+  font-weight: 300;
+   line-height: 60rpx;
+   white-space: nowrap;
+   animation: remindMessage 20s linear infinite;
+   width: 100%;
+}
+/* 滚动显示 */
+@keyframes remindMessage {
+  0% {
+    -webkit-transform: translateX(100%);
+  }
         
-     100% {
-                -webkit-transform: translateX(-180%);
-            }
-        }
-      
+  100% {
+    -webkit-transform: translateX(-180%);
+  }
+}
+
+/* 内容(隐藏使用) */
+.xaifangneirong{}
+/* 是否隐藏的符号 */
+.yincangfuhao{
+  height: 23px;
+  background-color: royalblue;
+}
+/* 隐藏按钮 */
+.yincangbutton{
+  width: 10%;
+  font-size: 10px;
+  text-align: center;
+  font-weight: bold;
+  vertical-align: middle;
+  top: 3px;
+  position: relative;
+  margin-left: 45%;
+  margin-right: 45%;
+  color: red;
+  background-color: red;
+}
+
+/* 基本信息 */
+.information{
+  height: 150rpx;
   
+  background-color: sienna;
+}
+
+/* 车辆信息 */
+.bus_leixing{
+  position: relative;
+  top: 5rpx;
+  margin-left: 50rpx;
+  font-size: 20px;
+  width: fit-content;
+  background-color: green;
+  color: black;
+  font-weight: bold;
+  z-index: 50;
+}
+/* 座位信息 */
+.rate_people{
+  position: relative;
+  top:15rpx;
+  font-size: 16px;
+  margin-left: 50rpx;
+  padding-left: 20rpx;
+  padding-right: 10rpx;
+  width: fit-content;
+  background-color: blueviolet;
+  z-index: 20;
+}
+/* 并排显示 */
+.bingpai{
+  height: 150rpx;
+  background-color: pink;
+}
+/* 时间信息 */
+.shijianxinxi{
+  background-color: coral;
+  float: left;
+  margin-top: 15rpx;
+  height: 120rpx;
+  width: 50%;
+}
+/* 时间信息标题 */
+.time_title{
+  position: relative;
+  left: 50rpx;
+  top: 5rpx;
+  width: fit-content;
+  font-size: 13px;
+  background-color: seagreen;
+}
+/* 时间 */
+.time_con{
+  width: 70%;
+  top: 10rpx;
+  height: fit-content;
+  position: relative;
+  left: 50rpx;
+  right: 50rpx;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  background-color: steelblue;
+}
+/* 站点信息 */
+.zhandianxinxi{
+  background-color: palegreen;
+  float: left;
+  margin-top: 15rpx;
+  height: 120rpx;
+  width: 50%;
+}
+/* 站点信息标题 */
+.zhan_title{
+  position: relative;
+  left: 50rpx;
+  top: 5rpx;
+  width: fit-content;
+  font-size: 13px;
+  background-color: saddlebrown;
+}
+/* 下一站 */
+.zhan_con{
+  width: 75%;
+  top: 20rpx;
+  height: fit-content;
+  position: relative;
+  left: 50rpx;
+  right: 50rpx;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  background-color: skyblue;
+}
+
+/* 车站图画 */
+.station_picture{
+  height: 400rpx;
+  background-color: red;
+}
+
+/* 路线矫正 */
+.luxianjiaozheng{
+  float: right;
+  margin-top: 5px;
+  background-color: red;
+  width: 65px;
+  padding-left: 5px;
+  padding-right: 5px;
+  /* right: 0; */
+}
+      
